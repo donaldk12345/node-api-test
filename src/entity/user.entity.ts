@@ -18,8 +18,8 @@ export class User{
     @Column()
     password: string;
 
-    @ManyToOne( () => Role)
+    @ManyToOne( (type) => Role, (role) => role.id,{ eager:true})
     @JoinColumn({name: 'role_id'})
-    role: Role;
+    role: Role[];
 
 }

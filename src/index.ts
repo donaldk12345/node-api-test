@@ -1,6 +1,6 @@
 require('dotenv').config();
 import express , {Request, Response} from 'express';
-const cors = require("cors");
+const cors = require('cors');
 import { routes } from './route';
 import { createConnection } from 'typeorm';
 import cookieParser from 'cookie-parser';
@@ -12,10 +12,13 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: '*',
     methods: ["GET","POST","PUT","DELETE"],
-    credentials: true
+    credentials: true,
+
 }))
+
+
 
 routes(app);
 

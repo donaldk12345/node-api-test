@@ -1,8 +1,9 @@
 import {Router}  from 'express';
 import { Login, Register, AuthenticateUser, Logout, UpdateProfile, UpdatePassword } from './controller/auth.controller';
-import { CreateRole, DeleteRole, Roles, UpdateRole } from './controller/role.controller';
+import { CreateRole, DeleteRole, Roles, UpdateRole, getRoles } from './controller/role.controller';
 import { CreateUser, DeleteUser, GetUser, UpdateUser, Users } from './controller/user.controller';
 import { AuthMiddleware } from './middleware/auth.middleware';
+import { Permissions, createPermissions } from './controller/permission.controller';
 export const routes= (router : Router) =>{
 
     router.post('/api/register', Register);
@@ -20,6 +21,10 @@ export const routes= (router : Router) =>{
     router.get('/api/roles',AuthMiddleware, Roles);
     router.post('/api/roles',AuthMiddleware, CreateRole);
     router.put('/api/roles/:id', AuthMiddleware, UpdateRole);
+    router.get('/api/roles/:id', AuthMiddleware, getRoles);
     router.delete('/api/roles/:id', AuthMiddleware, DeleteRole);
+
+    router.get('/api/permissions', AuthMiddleware, Permissions);
+    router.post('/api/permissions', AuthMiddleware, createPermissions);
 
 }

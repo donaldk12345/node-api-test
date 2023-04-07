@@ -9,12 +9,23 @@ export const Roles = async (req: Request, res: Response) =>{
     res.send( await repository.find());
 
 }
-export const CreateRole = async (req: Request, res: Response) =>{
 
-   
+export const getRoles = async (req: Request, res: Response) =>{
+
     const repository = getManager().getRepository(Role);
 
-    const role = await repository.save(req.body);
+    res.send( await repository.findOneBy(req.params));
+
+}
+export const CreateRole = async (req: Request, res: Response) =>{
+
+    const { name, permissions } = req.body;
+    const repository = getManager().getRepository(Role);
+
+    const role = await repository.save({
+        name,
+        permissions: permissions.map(id => ({id}))
+    });
 
     res.send(role);
 
@@ -23,10 +34,16 @@ export const UpdateRole = async (req: Request, res: Response) =>{
 
    
     const repository = getManager().getRepository(Role);
+      const { name, permissions } = req.body;
 
-     await repository.update(req.params.id, req.body);
+    const role = await repository.save({
+        id: parseInt(req.params.id),
+        name,
+        permissions: permissions.map(id=>({id}))
+        
+    });
 
-    res.send(await repository.findOneBy(req.params));
+    res.send(role);
 
 }
 export const DeleteRole = async (req: Request, res: Response) =>{
