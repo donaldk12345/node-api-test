@@ -5,7 +5,7 @@ import { Role } from "../entity/role.entity";
 createConnection().then(async connection => {
     const permissionRepository = getManager().getRepository(Permission);
 
-    const params = ['EDIT_USER', 'VIEW_USER', 'DELETE_USER', 'CREATE_USER', 'CREATE_ROLE', 'VIEW_ROLE',
+    const params = ['EDIT_USER','VIEW_USER', 'DELETE_USER', 'CREATE_USER', 'CREATE_ROLE', 'VIEW_ROLE',
         'EDIT_ROLE', 'DELETE_ROLE', 'CREATE_ARTICLE', 'EDIT_ARTICLE', 'DELETE_ARTICLE',
         'CREATE_CATEGORY', 'EDIT_CATEGORY', 'DELETE_CATEGORY'];
     
@@ -13,7 +13,7 @@ createConnection().then(async connection => {
     
     for (let i = 0; i < params.length; i++){
         permissions.push(await permissionRepository.save({
-           name: params[i]
+            name: params[i] 
       }))
     }
 

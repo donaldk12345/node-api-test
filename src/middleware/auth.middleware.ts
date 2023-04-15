@@ -6,8 +6,11 @@ import { User } from "../entity/user.entity";
 export const AuthMiddleware = async (req: Request, res: Response, next: Function) =>{
     try{
 
-        const jwt= req.cookies['jwt'];
-        const payload: any = verify(jwt, process.env.SECRET_KEY);
+        let token = req.get('Authorization')
+        token = token.split(" ")[1];
+        // const jwt= req.header('Authorization')?.split("")[1] || "";
+        const payload: any = verify(token, process.env.SECRET_KEY);
+
     
          if(!payload){
             return res.status(401).send({

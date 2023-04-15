@@ -58,6 +58,7 @@ export const UpdateUser = async (req: Request, res: Response) =>{
     res.send(user);
 
 }
+
 export const DeleteUser = async (req: Request, res: Response) =>{
    
     const repository = getManager().getRepository(User);
