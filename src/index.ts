@@ -1,6 +1,7 @@
 require('dotenv').config();
 import express , {Request, Response} from 'express';
 const cors = require('cors');
+global.__basedir = __dirname;
 import { routes } from './route';
 import { createConnection } from 'typeorm';
 import cookieParser from 'cookie-parser';

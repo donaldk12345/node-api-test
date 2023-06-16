@@ -9,10 +9,11 @@ export const CreatePatient = async (req: Request, res: Response) =>{
 
     const {nom,prenom,sexe,quartier,ville,profession,date_naiss,telephone,numero_cni,antecedents} = req.body;
 
+
     const patients = await repository.save({
         nom, prenom, sexe, ville, profession
-        , date_naiss, telephone, numero_cni,quartier,
-        antecedents: antecedents.map(id => ({id}))
+        , date_naiss, telephone, numero_cni, quartier,
+         antecedents: antecedents.map(id => ({id}))
 
     });
 
@@ -22,9 +23,9 @@ export const CreatePatient = async (req: Request, res: Response) =>{
 
 export const getPatients = async (req: Request, res: Response) =>{
 
-    const repository = getManager().getRepository(Patient);
+    const repository = getManager().getRepository(Patient); 
 
-     res.send( await repository.find());
+        res.send( await repository.find());
 
 }
 
@@ -40,13 +41,12 @@ export const UpdatePatient = async (req: Request, res: Response) =>{
 
    
     const repository = getManager().getRepository(Patient);
-      const {nom,prenom,sexe,quartier,ville,profession,date_naiss,telephone,numero_cni,antecedents} = req.body;
+      const {nom,prenom,sexe,quartier,ville,profession,date_naiss,telephone,numero_cni} = req.body;
 
     const patient = await repository.save({
           id: parseInt(req.params.id),
         nom, prenom, sexe, ville, profession
-        , date_naiss, telephone, numero_cni,quartier,
-        antecedents: antecedents.map(id => ({id}))
+        , date_naiss, telephone, numero_cni,quartier
 
     });
 

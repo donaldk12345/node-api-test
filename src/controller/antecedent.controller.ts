@@ -7,16 +7,12 @@ import { Request, Response } from "express";
 export const CreateAntecedent = async (req: Request, res: Response) =>{
 
     const repository = getManager().getRepository(Antecedent);
+    const { nom_antecedent, description, type, date_ante} = req.body;
     
-    const { nom, type,date_antecedant} = req.body;
-
-    const antecedents = await repository.save({
-        nom,
-        type,
-        date_antecedant
-    });
-
-    res.status(200).send(antecedents);
+    const antecedant = await repository.save({
+        nom_antecedent,description,type,date_ante
+    })
+    res.status(200).send(antecedant);
 
 }
 
@@ -31,13 +27,13 @@ export const UpdateAntecedent = async (req: Request, res: Response) =>{
 
     const repository = getManager().getRepository(Antecedent);
     
-    const { nom, type,date_antecedant} = req.body;
+    const { nom_antecedent, type,date_ante} = req.body;
 
     const antecedents = await repository.save({
         id: parseInt(req.params.id),
-        nom,
+        nom_antecedent,
         type,
-        date_antecedant
+        date_ante
     });
 
     res.status(200).send(antecedents);

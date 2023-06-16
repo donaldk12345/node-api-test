@@ -9,6 +9,7 @@ import multer from 'multer';
 import { extname } from 'path';
 import { CreatePatient, DeletePatient, UpdatePatient, getPatient, getPatients } from './controller/patient.controller';
 import { CreateAntecedent, DeleteAntecedent, UpdateAntecedent, getAntecedent } from './controller/antecedent.controller';
+import { countItems } from './controller/dashboard.controller';
 export const routes= (router : Router) =>{
 
     router.post('/api/register', Register);
@@ -38,10 +39,13 @@ export const routes= (router : Router) =>{
     router.put('/api/patient/:id', AuthMiddleware, UpdatePatient);
     router.delete('/api/patient/:id', AuthMiddleware, DeletePatient);
 
-    router.post('/api/antecedent', AuthMiddleware, CreateAntecedent);
+    router.post('/api/antecedents', AuthMiddleware, CreateAntecedent);
     router.get('/api/antecedents', AuthMiddleware, getAntecedent);
     router.put('/api/antecedant/:id', AuthMiddleware, UpdateAntecedent);
     router.delete('/api/antecedent/:id', AuthMiddleware, DeleteAntecedent);
+
+
+    router.get('/api/items', AuthMiddleware, countItems);
 
     const storage = multer.diskStorage({
         destination: './upload',

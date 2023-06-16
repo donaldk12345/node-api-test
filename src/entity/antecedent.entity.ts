@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Patient } from "./patient.entity";
 
 @Entity()
 export class Antecedent{
@@ -7,11 +8,14 @@ export class Antecedent{
     id: number;
 
     @Column()
-    nom: string;
+    nom_antecedent: string;
+
+    @Column()
+    description: string;
 
     @Column()
     type: string;
-    
+
     @Column({ type: 'timestamptz', precision: 3 })
-    date_antecedant: Date;
+    date_ante: Date;
 }

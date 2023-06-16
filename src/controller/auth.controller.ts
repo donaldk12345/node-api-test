@@ -53,7 +53,7 @@ export const Login = async (req: Request, res: Response) =>{
 
     
    
-    const token = sign({ id: user.id }, process.env.SECRET_KEY,{expiresIn:'30Min'}); 
+    const token = sign({ id: user.id }, process.env.SECRET_KEY,{expiresIn:'300Min'}); 
     // res.cookie('jwt', token,{
     //     httpOnly: true,
     //     maxAge: 24 * 60 * 60 * 1000 

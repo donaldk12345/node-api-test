@@ -33,8 +33,7 @@ export class Patient{
     @Column()
     ville: string;
 
-
-    @ManyToMany(()=>Antecedent,(antecedents)=>antecedents.id,{ eager: true })
+    @ManyToMany(() => Antecedent, (antecedents) => antecedents.id, { eager: true, nullable:true })
     @JoinTable({
         name:'patient_antecedent',
         joinColumn: { name: 'patient_id', referencedColumnName: 'id' },
@@ -42,7 +41,6 @@ export class Patient{
          }
     )
     antecedents: Antecedent[];
-
 
     @Column()
     sexe:string;
